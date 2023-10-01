@@ -5,7 +5,6 @@ const int ERRO_NENHUM = 0;
 
 using namespace std;
 
-
 class Vig {
    public:
       string k;
