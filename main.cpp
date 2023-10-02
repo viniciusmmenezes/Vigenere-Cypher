@@ -1,8 +1,6 @@
 #include <iostream>
 #include <string>
-
 using namespace std;
-
 class Vig {
 public:
   string k;
@@ -41,23 +39,42 @@ public:
     return output;
   }
 };
-
 int main() {
+
   string plainText;
+  string encryptedText;
   string encryptionKey;
 
-  cout << "Digite o texto a ser cifrado: ";
+  cout << "-----------------------------\n";
+  cout << "Digite o texto a ser cifrado: \n";
   getline(cin, plainText);
+  cout << "\n";
 
   cout << "Digite a chave: ";
   cin >> encryptionKey;
+  cout << "\n";
 
   Vig v(encryptionKey);
-  string ori = plainText;
-  string encrypt = v.encryption(ori);
-  string decrypt = v.decryption(encrypt);
+  string encrypt = v.encryption(plainText);
 
-  cout << "Mensagem Original: " << ori << endl;
-  cout << "Mensagem Cifrada: " << encrypt << endl;
-  cout << "Mensagem Decifrada: " << decrypt << endl;
+  cout << "Mensagem Cifrada: \n" << encrypt << endl;
+  cout << "\n";
+
+  cout << "-------------------------------\n";
+  cout << "Digite o texto a ser decifrado: ";
+  cout << "\n";
+  cin.ignore();
+  getline(cin, encryptedText);
+  cout << "\n";
+
+  cout << "Digite a chave: ";
+  cin >> encryptionKey;
+  cout << "\n";
+
+  Vig w(encryptionKey);
+  string decrypt = w.decryption(encryptedText);
+
+  cout << "Mensagem Decifrada: \n" << decrypt << endl;
+
+  return 0;
 }
