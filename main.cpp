@@ -39,42 +39,85 @@ public:
     return output;
   }
 };
+
+bool isNumeric(std::string const &str)
+{
+    auto it = str.begin();
+    while (it != str.end() && std::isdigit(*it)) {
+        it++;
+    }
+    return !str.empty() && it == str.end();
+}
+
 int main() {
 
   string plainText;
   string encryptedText;
   string encryptionKey;
+  char choice;
+  bool quit = false;
 
-  cout << "-----------------------------\n";
-  cout << "Digite o texto a ser cifrado: \n";
-  getline(cin, plainText);
-  cout << "\n";
+  do {
 
-  cout << "Digite a chave: ";
-  cin >> encryptionKey;
-  cout << "\n";
+        cout << "-----------------------------\n";
+        cout << "1) Cifrar" << endl;
+        cout << "2) Decifrar" << endl;
+        cout << "3) Sair" << endl;
+        cout << "Escolha uma opcao: " << endl;
+        cin >> choice;
 
-  Vig v(encryptionKey);
-  string encrypt = v.encryption(plainText);
+    switch (choice) {
+    case '1': {
 
-  cout << "Mensagem Cifrada: \n" << encrypt << endl;
-  cout << "\n";
+      cout << "-----------------------------\n";
+      cout << "Digite o texto a ser cifrado: \n";
+      cin.ignore();
+      getline(cin, plainText);
+      cout << "\n";
 
-  cout << "-------------------------------\n";
-  cout << "Digite o texto a ser decifrado: ";
-  cout << "\n";
-  cin.ignore();
-  getline(cin, encryptedText);
-  cout << "\n";
+      cout << "Digite a chave: ";
+      cin >> encryptionKey;
+      cout << "\n";
 
-  cout << "Digite a chave: ";
-  cin >> encryptionKey;
-  cout << "\n";
+      Vig v(encryptionKey);
+      string encrypt = v.encryption(plainText);
 
-  Vig w(encryptionKey);
-  string decrypt = w.decryption(encryptedText);
+      cout << "Mensagem Cifrada: \n" << encrypt << endl;
+      cout << "\n";
 
-  cout << "Mensagem Decifrada: \n" << decrypt << endl;
+      break;
+    }
+    case '2': {
 
+      cout << "-------------------------------\n";
+      cout << "Digite o texto a ser decifrado: ";
+      cout << "\n";
+      cin.ignore();
+      getline(cin, encryptedText);
+      cout << "\n";
+
+      cout << "Digite a chave: ";
+      cin >> encryptionKey;
+      cout << "\n";
+
+      Vig w(encryptionKey);
+      string decrypt = w.decryption(encryptedText);
+
+      cout << "Mensagem Decifrada: \n" << decrypt << endl;
+
+      break;
+    }
+    case '3': {
+
+      cout << "Tchau!" << endl;
+      quit = true;
+      break;
+    }
+    default: {
+      cout << "Opcao invalida!" << endl;
+    }
+    }
+  } while (!quit);
+  
   return 0;
 }
